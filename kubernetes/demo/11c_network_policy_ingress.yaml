@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: direct-line-to-peach
+spec:
+  podSelector:
+    matchLabels:
+      location: castle
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          caller: mario
+# allow access originating from SAP networks
+    - ipBlock:
+        # <insert local cidr block>
+        cidr: <ip block>
